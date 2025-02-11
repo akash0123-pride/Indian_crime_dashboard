@@ -79,39 +79,6 @@ recovery_rate = df_filtered[["Recovered_Cases", "Stolen_Cases"]].sum()
 fig_pie = px.pie(values=recovery_rate, names=["Recovered", "Not Recovered"],
                  title="Recovery Success Rate", template="plotly_dark")
 st.plotly_chart(fig_pie)
-import pandas as pd
-import streamlit as st
-import plotly.express as px
-import numpy as np
-
-# Load dataset
-url = "https://raw.githubusercontent.com/akash0123-pride/Indian_crime_dashboard/main/10_Property_stolen_and_recovered.csv"
-df = pd.read_csv(url)
-
-# Ensure proper column names
-df.columns = ["State_UT", "Year", "Crime_Category", "Sub_Category", "Recovered_Cases", "Stolen_Cases", "Recovered_Value", "Stolen_Value"]
-
-# Convert Year column to integer
-df["Year"] = df["Year"].astype(int)
-
-# Streamlit App
-st.title("Indian Crime Data Dashboard")
-st.sidebar.header("Filters")
-
-# Filters
-year = st.sidebar.selectbox("Select Year", sorted(df["Year"].unique()), index=0)
-state = st.sidebar.selectbox("Select State/UT", sorted(df["State_UT"].unique()))
-category = st.sidebar.selectbox("Select Crime Category", sorted(df["Crime_Category"].unique()))
-
-# Filtered Data
-df_filtered = df[(df["Year"] == year) & (df["State_UT"] == state) & (df["Crime_Category"] == category)]
-
-# 1. Crime Trends Over Time
-st.subheader("Crime Trends Over Time")
-df_trend = df[df["Crime_Category"] == category].groupby("Year").sum().reset_index()
-fig_trend = px.line(df_trend, x="Year", y=["Stolen_Cases", "Recovered_Cases"],
-                     title="Crime Trends Over the Years", template="plotly_dark")
-st.plotly_chart(fig_trend)
 
 # 2. State-Wise Crime Distribution
 st.subheader("State-Wise Crime Distribution")
