@@ -124,7 +124,8 @@ The dataset consists of the following key attributes:
 ✅ **FIR Status Dashboard** - Insight into solved vs. pending cases.
 
 📊 **Example Dashboard Screenshot**  
-![Crime Dashboard](crime_dashboard.png)
+<img width="956" alt="image" src="https://github.com/user-attachments/assets/48492319-b0a8-4b14-9e6e-3c23a3777ff0" />
+
 
 🔗 **Live Dashboard:** [Indian Crime Data Dashboard](https://indiancrimepy-6rphzupbhgd543oyxgiuds.streamlit.app/)
 
