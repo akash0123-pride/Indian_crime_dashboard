@@ -116,7 +116,8 @@ The dataset consists of the following key attributes:
 ### **5. Predictive Analysis Using Machine Learning**
 - A predictive model was developed to forecast future crime trends.
 - Key influencing factors: **population density, past crime rates, and law enforcement efficiency**.
-![image](https://github.com/user-attachments/assets/b6e0cbf3-ef8a-4d8c-93c0-8d865e948456)
+![image](https://github.com/user-attachments/assets/068bde9b-4353-4b6f-b02c-e757ede25f0b)
+
 
 
 
