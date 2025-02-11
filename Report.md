@@ -3,6 +3,7 @@
 ## **INTRODUCTION**
 
 ### **PROJECT TITLE:** Indian Crime Data Analysis
+![image](https://github.com/user-attachments/assets/14327347-d57a-4d81-9f61-2a2733febfd9)
 
 ### **PROJECT PURPOSE:**
 - To analyze crime trends across different states in India.
@@ -84,34 +85,41 @@ The dataset consists of the following key attributes:
 - Identification of peak months and seasonal crime variations.
 
 📊 **Crime Trends Over the Years**  
-![Crime Trends](crime_trends.png)
+![image](https://github.com/user-attachments/assets/1aa7663a-1251-4138-9897-656f59c68ce4)
+
 
 ### **2. State-Wise Crime Distribution**
 - Identification of states with the highest crime rates.
 - Crime density heatmaps were used for better insights.
 
 📊 **State-wise Crime Distribution**  
-![State-wise Crime](statewise_crime.png)
+![image](https://github.com/user-attachments/assets/0c51d523-f203-4194-bb6b-5b73fad6afea)
+
 
 ### **3. Recovery Success Rate**
 - Comparison of stolen vs. recovered property across different states.
 - Identification of states with the highest and lowest recovery efficiency.
 
 📊 **Recovery Success Rate Analysis**  
-![Recovery Success Rate](recovery_rate.png)
+![image](https://github.com/user-attachments/assets/52812229-6c53-49c6-9c0f-b306786b0fe4)
+
 
 ### **4. Crime Type Distribution**
 - Burglary and theft were the most common crimes.
 - Cybercrime cases showed the lowest recovery rate.
 
 📊 **Crime Type Distribution**  
-![Crime Type Distribution](crime_type_distribution.png)
+![image](https://github.com/user-attachments/assets/10001124-23c5-4ff2-8b43-29bbba279d5d)
+
+
 
 ### **5. Predictive Analysis Using Machine Learning**
 - A predictive model was developed to forecast future crime trends.
 - Key influencing factors: **population density, past crime rates, and law enforcement efficiency**.
+![image](https://github.com/user-attachments/assets/b6e0cbf3-ef8a-4d8c-93c0-8d865e948456)
 
-📊 **Crime Prediction Model Accuracy: 85%**
+
+
 
 ---
 
