@@ -81,7 +81,8 @@ fig_pie = px.pie(values=recovery_rate, names=["Recovered", "Not Recovered"],
 st.plotly_chart(fig_pie)
 # 2. State-Wise Crime Distribution
 st.subheader("State-Wise Crime Distribution")
-df_state = df.groupby("State_UT").sum().reset_index()
+df_state = df.groupby("State_UT", as_index=False)[["Stolen_Cases"]].sum()
+
 state_crime = sns.barplot(data=df_state.sort_values("Stolen_Cases", ascending=False)[:10], x="Stolen_Cases", y="State_UT", palette="Reds")
 st.pyplot(state_crime.get_figure())
 
