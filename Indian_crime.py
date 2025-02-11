@@ -79,6 +79,46 @@ recovery_rate = df_filtered[["Recovered_Cases", "Stolen_Cases"]].sum()
 fig_pie = px.pie(values=recovery_rate, names=["Recovered", "Not Recovered"],
                  title="Recovery Success Rate", template="plotly_dark")
 st.plotly_chart(fig_pie)
+# 2. State-Wise Crime Distribution
+st.subheader("State-Wise Crime Distribution")
+fig, ax = plt.subplots(figsize=(12, 6))
+df_state = df.groupby("State_UT").sum().reset_index()
+sns.barplot(data=df_state.sort_values("Stolen_Cases", ascending=False)[:10], x="Stolen_Cases", y="State_UT", palette="Reds", ax=ax)
+plt.title("Top 10 States with Highest Crime Rates")
+st.pyplot(fig)
+
+# 3. Recovery Success Rate
+st.subheader("Recovery Success Rate")
+df_recovery = df.groupby("State_UT")[["Recovered_Cases", "Stolen_Cases"]].sum().reset_index()
+df_recovery["Recovery_Rate"] = df_recovery["Recovered_Cases"] / df_recovery["Stolen_Cases"] * 100
+fig, ax = plt.subplots(figsize=(12, 6))
+sns.barplot(data=df_recovery.sort_values("Recovery_Rate", ascending=False)[:10], x="Recovery_Rate", y="State_UT", palette="Blues", ax=ax)
+plt.title("Top 10 States with Highest Recovery Rates")
+st.pyplot(fig)
+
+# 4. Heatmap for Crime Rates by State
+st.subheader("Heatmap of Crime Rates by State and Year")
+fig, ax = plt.subplots(figsize=(12, 8))
+df_pivot = df.pivot_table(values="Stolen_Cases", index="State_UT", columns="Year", aggfunc=np.sum)
+sns.heatmap(df_pivot, cmap="Reds", annot=True, fmt=".0f", ax=ax)
+plt.title("Heatmap of Stolen Cases by State and Year")
+st.pyplot(fig)
+
+# 5. Scatter Plot: Stolen vs Recovered Cases
+st.subheader("Scatter Plot: Stolen vs Recovered Cases")
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.scatterplot(data=df, x="Stolen_Cases", y="Recovered_Cases", hue="Crime_Category", alpha=0.6, ax=ax)
+plt.title("Stolen vs Recovered Cases by Crime Category")
+st.pyplot(fig)
+
+# 6. Boxplot: Stolen Value Distribution by Crime Type
+st.subheader("Boxplot: Stolen Value Distribution by Crime Type")
+fig, ax = plt.subplots(figsize=(12, 6))
+sns.boxplot(data=df, x="Crime_Category", y="Stolen_Value", palette="coolwarm", ax=ax)
+plt.xticks(rotation=45)
+plt.title("Distribution of Stolen Value by Crime Type")
+st.pyplot(fig)
+
 
 
 st.write("### Data Table")
