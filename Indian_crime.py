@@ -12,7 +12,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 # Load Data
-url = "https://raw.githubusercontent.com/akash0123-pride/Indian_crime_dashboard/main/10_Property_stolen_and_recovered.csv
+url = "https://raw.githubusercontent.com/akash0123-pride/Indian_crime_dashboard/main/10_Property_stolen_and_recovered.csv"
 "
 df = pd.read_csv(url)
 
