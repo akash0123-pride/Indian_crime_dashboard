@@ -60,6 +60,11 @@ year = st.sidebar.selectbox("Select Year", sorted(df["Year"].unique()), index=0)
 state = st.sidebar.selectbox("Select State/UT", sorted(df["State_UT"].unique()))
 category = st.sidebar.selectbox("Select Crime Category", sorted(df["Crime_Category"].unique()))
 
+# Report Section
+st.sidebar.header("Report")
+report_link = "[View Full Report](https://your-report-link.com)"
+st.sidebar.markdown(report_link, unsafe_allow_html=True)
+
 # Filtered Data
 df_filtered = df[(df["Year"] == year) & (df["State_UT"] == state) & (df["Crime_Category"] == category)]
 
