@@ -102,13 +102,13 @@ fig_heatmap = px.imshow(df_pivot, labels=dict(x="Year", y="State_UT", color="Sto
                          title="Heatmap of Stolen Cases by State and Year", template="plotly_dark")
 st.plotly_chart(fig_heatmap)
 
-# 5. Scatter Plot: Stolen vs Recovered Cases
+#  Scatter Plot: Stolen vs Recovered Cases
 st.subheader("Scatter Plot: Stolen vs Recovered Cases")
 fig_scatter = px.scatter(df, x="Stolen_Cases", y="Recovered_Cases", color="Crime_Category", 
                          title="Stolen vs Recovered Cases by Crime Category", template="plotly_dark")
 st.plotly_chart(fig_scatter)
 
-# 6. Boxplot: Stolen Value Distribution by Crime Type
+#  Boxplot: Stolen Value Distribution by Crime Type
 st.subheader("Boxplot: Stolen Value Distribution by Crime Type")
 fig_boxplot = px.box(df, x="Crime_Category", y="Stolen_Value", color="Crime_Category", 
                       title="Distribution of Stolen Value by Crime Type", template="plotly_dark")
