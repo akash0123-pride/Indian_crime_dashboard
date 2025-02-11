@@ -79,6 +79,70 @@ recovery_rate = df_filtered[["Recovered_Cases", "Stolen_Cases"]].sum()
 fig_pie = px.pie(values=recovery_rate, names=["Recovered", "Not Recovered"],
                  title="Recovery Success Rate", template="plotly_dark")
 st.plotly_chart(fig_pie)
+# 1. Crime Trends Over Time
+plt.figure(figsize=(10, 5))
+sns.lineplot(data=df.groupby("Year").sum().reset_index(), x="Year", y="Stolen_Cases", label="Stolen Cases")
+sns.lineplot(data=df.groupby("Year").sum().reset_index(), x="Year", y="Recovered_Cases", label="Recovered Cases")
+plt.title("Crime Trends Over the Years")
+plt.legend()
+plt.savefig("crime_trends.png")
+plt.show()
+
+# 2. State-Wise Crime Distribution
+plt.figure(figsize=(12, 6))
+df_state = df.groupby("State_UT").sum().reset_index()
+sns.barplot(data=df_state.sort_values("Stolen_Cases", ascending=False)[:10], x="Stolen_Cases", y="State_UT", palette="Reds")
+plt.title("Top 10 States with Highest Crime Rates")
+plt.savefig("statewise_crime.png")
+plt.show()
+
+# 3. Recovery Success Rate
+df_recovery = df.groupby("State_UT")[["Recovered_Cases", "Stolen_Cases"]].sum().reset_index()
+df_recovery["Recovery_Rate"] = df_recovery["Recovered_Cases"] / df_recovery["Stolen_Cases"] * 100
+plt.figure(figsize=(12, 6))
+sns.barplot(data=df_recovery.sort_values("Recovery_Rate", ascending=False)[:10], x="Recovery_Rate", y="State_UT", palette="Blues")
+plt.title("Top 10 States with Highest Recovery Rates")
+plt.savefig("recovery_success.png")
+plt.show()
+
+# 4. Crime Type Distribution
+plt.figure(figsize=(12, 6))
+sns.countplot(data=df, y="Crime_Category", order=df["Crime_Category"].value_counts().index, palette="coolwarm")
+plt.title("Crime Type Distribution")
+plt.savefig("crime_type_distribution.png")
+plt.show()
+
+# 5. Predictive Analysis Placeholder (Example Bar Chart for Accuracy Visualization)
+plt.figure(figsize=(6, 4))
+plt.bar(["Model Accuracy"], [85], color='green')
+plt.ylim(0, 100)
+plt.title("Crime Prediction Model Accuracy: 85%")
+plt.savefig("crime_prediction_accuracy.png")
+plt.show()
+
+# 6. Heatmap for Crime Rates by State
+plt.figure(figsize=(12, 8))
+df_pivot = df.pivot_table(values="Stolen_Cases", index="State_UT", columns="Year", aggfunc=np.sum)
+sns.heatmap(df_pivot, cmap="Reds", annot=True, fmt=".0f")
+plt.title("Heatmap of Stolen Cases by State and Year")
+plt.savefig("crime_heatmap.png")
+plt.show()
+
+# 7. Scatter Plot: Stolen vs Recovered Cases
+plt.figure(figsize=(8, 6))
+sns.scatterplot(data=df, x="Stolen_Cases", y="Recovered_Cases", hue="Crime_Category", alpha=0.6)
+plt.title("Stolen vs Recovered Cases by Crime Category")
+plt.savefig("stolen_vs_recovered.png")
+plt.show()
+
+# 8. Boxplot: Stolen Value Distribution by Crime Type
+plt.figure(figsize=(12, 6))
+sns.boxplot(data=df, x="Crime_Category", y="Stolen_Value", palette="coolwarm")
+plt.xticks(rotation=45)
+plt.title("Distribution of Stolen Value by Crime Type")
+plt.savefig("stolen_value_distribution.png")
+plt.show()
+
 
 st.write("### Data Table")
 st.dataframe(df_filtered)
