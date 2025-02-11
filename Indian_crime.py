@@ -62,7 +62,7 @@ category = st.sidebar.selectbox("Select Crime Category", sorted(df["Crime_Catego
 
 # Report Section
 st.sidebar.header("Report")
-report_link = "[View Full Report](https://your-report-link.com)"
+report_link = "[View Full Report](https://github.com/akash0123-pride/Indian_crime_dashboard/blob/main/Report.md)"
 st.sidebar.markdown(report_link, unsafe_allow_html=True)
 
 # Filtered Data
