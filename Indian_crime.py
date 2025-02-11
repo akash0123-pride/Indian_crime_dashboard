@@ -80,14 +80,14 @@ fig_pie = px.pie(values=recovery_rate, names=["Recovered", "Not Recovered"],
                  title="Recovery Success Rate", template="plotly_dark")
 st.plotly_chart(fig_pie)
 
-# 2. State-Wise Crime Distribution
+#  State-Wise Crime Distribution
 st.subheader("State-Wise Crime Distribution")
 df_state = df.groupby("State_UT", as_index=False)[["Stolen_Cases"]].sum()
 fig_state = px.bar(df_state.sort_values("Stolen_Cases", ascending=False)[:10], x="Stolen_Cases", y="State_UT", 
                     title="Top 10 States with Highest Crime Rates", template="plotly_dark")
 st.plotly_chart(fig_state)
 
-# 3. Recovery Success Rate
+#  Recovery Success Rate
 st.subheader("Recovery Success Rate")
 df_recovery = df.groupby("State_UT")[["Recovered_Cases", "Stolen_Cases"]].sum().reset_index()
 df_recovery["Recovery_Rate"] = df_recovery["Recovered_Cases"] / df_recovery["Stolen_Cases"] * 100
@@ -95,9 +95,9 @@ fig_recovery = px.bar(df_recovery.sort_values("Recovery_Rate", ascending=False)[
                         title="Top 10 States with Highest Recovery Rates", template="plotly_dark")
 st.plotly_chart(fig_recovery)
 
-# 4. Heatmap for Crime Rates by State
+# Heatmap for Crime Rates by State
 st.subheader("Heatmap of Crime Rates by State and Year")
-df_pivot = df.pivot_table(values="Stolen_Cases", index="State_UT", columns="Year", aggfunc=np.sum)
+df_pivot = df.pivot_table(values="Stolen_Cases", index="State_UT", columns="Year", aggfunc="sum", fill_value=0)
 fig_heatmap = px.imshow(df_pivot, labels=dict(x="Year", y="State_UT", color="Stolen Cases"), 
                          title="Heatmap of Stolen Cases by State and Year", template="plotly_dark")
 st.plotly_chart(fig_heatmap)
