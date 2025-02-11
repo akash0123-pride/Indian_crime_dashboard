@@ -11,7 +11,7 @@ This report presents an in-depth analysis of crime trends in India, focusing on 
 - Certain states report **higher crime rates** due to economic and demographic factors.
 - Seasonal variations were noted, with crime rates **peaking in specific months**. 
 
-![Crime Trends Over Years](https://via.placeholder.com/600x300)
+![Crime Trends Over Years](crime_trends.png)
 
 ---
 
@@ -19,7 +19,7 @@ This report presents an in-depth analysis of crime trends in India, focusing on 
 - States like **Maharashtra, Uttar Pradesh, and Delhi** recorded the highest number of property-related crimes.
 - The recovery rate varies significantly, with some states **outperforming others in crime resolution**.
 
-![State-wise Crime Analysis](https://via.placeholder.com/600x300)
+![State-wise Crime Analysis](statewise_crime.png)
 
 ---
 
@@ -27,7 +27,7 @@ This report presents an in-depth analysis of crime trends in India, focusing on 
 - **Only a small percentage of stolen property is successfully recovered**, indicating a need for improved law enforcement strategies.
 - Certain crime categories, such as **cyber theft**, show particularly low recovery rates.
 
-![Crime Recovery Success Rate](https://via.placeholder.com/600x300)
+![Crime Recovery Success Rate](recovery_rate.png)
 
 ---
 
@@ -35,7 +35,7 @@ This report presents an in-depth analysis of crime trends in India, focusing on 
 - The most common types of crimes include **burglary, robbery, and motor vehicle theft**.
 - Cybercrime and financial fraud are emerging concerns in the modern digital age.
 
-![Crime Type Distribution](https://via.placeholder.com/600x300)
+![Crime Type Distribution](crime_type_distribution.png)
 
 ---
 
