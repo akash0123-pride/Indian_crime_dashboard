@@ -79,36 +79,73 @@ recovery_rate = df_filtered[["Recovered_Cases", "Stolen_Cases"]].sum()
 fig_pie = px.pie(values=recovery_rate, names=["Recovered", "Not Recovered"],
                  title="Recovery Success Rate", template="plotly_dark")
 st.plotly_chart(fig_pie)
+import pandas as pd
+import streamlit as st
+import plotly.express as px
+import numpy as np
+
+# Load dataset
+url = "https://raw.githubusercontent.com/akash0123-pride/Indian_crime_dashboard/main/10_Property_stolen_and_recovered.csv"
+df = pd.read_csv(url)
+
+# Ensure proper column names
+df.columns = ["State_UT", "Year", "Crime_Category", "Sub_Category", "Recovered_Cases", "Stolen_Cases", "Recovered_Value", "Stolen_Value"]
+
+# Convert Year column to integer
+df["Year"] = df["Year"].astype(int)
+
+# Streamlit App
+st.title("Indian Crime Data Dashboard")
+st.sidebar.header("Filters")
+
+# Filters
+year = st.sidebar.selectbox("Select Year", sorted(df["Year"].unique()), index=0)
+state = st.sidebar.selectbox("Select State/UT", sorted(df["State_UT"].unique()))
+category = st.sidebar.selectbox("Select Crime Category", sorted(df["Crime_Category"].unique()))
+
+# Filtered Data
+df_filtered = df[(df["Year"] == year) & (df["State_UT"] == state) & (df["Crime_Category"] == category)]
+
+# 1. Crime Trends Over Time
+st.subheader("Crime Trends Over Time")
+df_trend = df[df["Crime_Category"] == category].groupby("Year").sum().reset_index()
+fig_trend = px.line(df_trend, x="Year", y=["Stolen_Cases", "Recovered_Cases"],
+                     title="Crime Trends Over the Years", template="plotly_dark")
+st.plotly_chart(fig_trend)
+
 # 2. State-Wise Crime Distribution
 st.subheader("State-Wise Crime Distribution")
 df_state = df.groupby("State_UT", as_index=False)[["Stolen_Cases"]].sum()
-
-state_crime = sns.barplot(data=df_state.sort_values("Stolen_Cases", ascending=False)[:10], x="Stolen_Cases", y="State_UT", palette="Reds")
-st.pyplot(state_crime.get_figure())
+fig_state = px.bar(df_state.sort_values("Stolen_Cases", ascending=False)[:10], x="Stolen_Cases", y="State_UT", 
+                    title="Top 10 States with Highest Crime Rates", template="plotly_dark")
+st.plotly_chart(fig_state)
 
 # 3. Recovery Success Rate
 st.subheader("Recovery Success Rate")
 df_recovery = df.groupby("State_UT")[["Recovered_Cases", "Stolen_Cases"]].sum().reset_index()
 df_recovery["Recovery_Rate"] = df_recovery["Recovered_Cases"] / df_recovery["Stolen_Cases"] * 100
-recovery_rate = sns.barplot(data=df_recovery.sort_values("Recovery_Rate", ascending=False)[:10], x="Recovery_Rate", y="State_UT", palette="Blues")
-st.pyplot(recovery_rate.get_figure())
+fig_recovery = px.bar(df_recovery.sort_values("Recovery_Rate", ascending=False)[:10], x="Recovery_Rate", y="State_UT", 
+                        title="Top 10 States with Highest Recovery Rates", template="plotly_dark")
+st.plotly_chart(fig_recovery)
 
 # 4. Heatmap for Crime Rates by State
 st.subheader("Heatmap of Crime Rates by State and Year")
 df_pivot = df.pivot_table(values="Stolen_Cases", index="State_UT", columns="Year", aggfunc=np.sum)
-heatmap = sns.heatmap(df_pivot, cmap="Reds", annot=True, fmt=".0f")
-st.pyplot(heatmap.get_figure())
+fig_heatmap = px.imshow(df_pivot, labels=dict(x="Year", y="State_UT", color="Stolen Cases"), 
+                         title="Heatmap of Stolen Cases by State and Year", template="plotly_dark")
+st.plotly_chart(fig_heatmap)
 
 # 5. Scatter Plot: Stolen vs Recovered Cases
 st.subheader("Scatter Plot: Stolen vs Recovered Cases")
-scatter_plot = sns.scatterplot(data=df, x="Stolen_Cases", y="Recovered_Cases", hue="Crime_Category", alpha=0.6)
-st.pyplot(scatter_plot.get_figure())
+fig_scatter = px.scatter(df, x="Stolen_Cases", y="Recovered_Cases", color="Crime_Category", 
+                         title="Stolen vs Recovered Cases by Crime Category", template="plotly_dark")
+st.plotly_chart(fig_scatter)
 
 # 6. Boxplot: Stolen Value Distribution by Crime Type
 st.subheader("Boxplot: Stolen Value Distribution by Crime Type")
-boxplot = sns.boxplot(data=df, x="Crime_Category", y="Stolen_Value", palette="coolwarm")
-st.pyplot(boxplot.get_figure())
-
+fig_boxplot = px.box(df, x="Crime_Category", y="Stolen_Value", color="Crime_Category", 
+                      title="Distribution of Stolen Value by Crime Type", template="plotly_dark")
+st.plotly_chart(fig_boxplot)
 
 
 st.write("### Data Table")
